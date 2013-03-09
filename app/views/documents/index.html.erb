@@ -1,0 +1,44 @@
+<hr>
+
+<table>
+  <tr>
+    <th><%= sortable "title" %></th>
+    <th><%= sortable "author" %></th>
+    <th><%= sortable "filename" %></th>
+    <th><%= sortable "created_at", "Added" %></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @documents.each do |document| %>
+  <tr>
+    <td>
+      <i class="icon-file"></i>
+      <%= link_to(truncate(document.title, :length => 65), document) %>
+    </td>
+    <td><%= document.author %></td>
+    <td><a href="<%= document.file_url %>"><%= document.filename %></a></td>
+    <td><%= time_ago_in_words(document.created_at) %> ago</td>
+    <% logger.debug(document.file_url) %>
+    <td>
+      <%= link_to document.file_url.to_s, :class => 'action-btn', :target => '_blank' do %>
+        <i class="icon-cloud-download"></i>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to edit_document_path(document), :class => 'action-btn' do %>
+        <i class="icon-pencil"></i>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to document, :class => 'action-btn', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="icon-trash"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<hr>
+
+<%= render 'form' %>

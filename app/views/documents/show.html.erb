@@ -1,0 +1,16 @@
+<hr>
+<h2><%= @document.title %></h2>
+
+<%= link_to @document.file_url.to_s, :class => 'action-btn', :target => '_blank' do %>
+  <i class="icon-cloud-download icon-large"></i>
+<% end %>
+<%= link_to edit_document_path(@document), :class => 'action-btn' do %>
+  <i class="icon-pencil icon-large"></i>
+<% end %>
+<%= link_to @document, :class => 'action-btn', method: :delete, data: { confirm: 'Are you sure?' } do %>
+  <i class="icon-trash icon-large"></i>
+<% end %>
+
+<h3><%= @document.author %></h2>
+
+<embed src="<%= @document.file_url %>" width="100%" height="600px">

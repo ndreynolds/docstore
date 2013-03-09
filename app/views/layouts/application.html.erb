@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Docstore</title>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="header">
+    <%= link_to :controller => "documents" do %>
+      <i class="icon-cloud"></i> DOCSTORE
+    <% end %>
+  </div>
+
+  <p id="notice"><%= notice %></p>
+
+<%= yield %>
+
+</body>
+</html>

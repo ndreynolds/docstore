@@ -1,0 +1,77 @@
+body {
+  background: white;
+  font-family: 'PT Sans', sans-serif;
+}
+
+h2 {
+  margin: 0 20px 0 0;
+  display: inline;
+}
+
+h3 {
+  font-weight: 300;
+  margin: 5px 0;
+}
+
+hr {
+  border: 1px solid black;
+  margin: 30px 0;
+}
+
+table {
+  font-size: 18px;
+  width: 100%;
+
+  th {
+    text-align: left;
+  }
+}
+
+input[type=text] {
+  border: 2px solid black;
+  padding: 7px;
+  outline: none;
+  font-size: 13px;
+  color: black;
+  width: 300px;
+}
+
+.upload-btn {
+  background: black;
+  color: white;
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  &:visited,
+  &:active {
+    color: black;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.action-btn {
+    color: gray;
+  }
+  &.action-btn:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.header {
+  font-size: 20px;
+  a:hover {
+    text-decoration: none;
+  }
+}

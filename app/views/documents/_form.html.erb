@@ -1,0 +1,31 @@
+<%= form_for(@document) do |f| %>
+  <% if @document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+      <ul>
+      <% @document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :title, :placeholder => "Title" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :author, :placeholder => "Author" %>
+  </div>
+
+  <div class="field">
+    <%= f.file_field :file %>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="upload-btn"> 
+      <i class="icon-cloud-upload"></i> Upload
+    </button>
+  </div>
+<% end %>
