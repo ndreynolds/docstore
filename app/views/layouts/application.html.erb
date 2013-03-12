@@ -4,6 +4,9 @@
   <title>Docstore</title>
   <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <script type="text/javascript">
+    window.SERVER_ROOT = '<%= request.protocol + request.host_with_port %>';
+  </script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -14,9 +17,14 @@
     <% end %>
   </div>
 
-  <p id="notice"><%= notice %></p>
+  <% if flash[:notice] %>
+    <div class="notice">
+      <%= flash[:notice] %>
+      <a class="close"><i class="icon-remove-circle"></i></a>
+    </div>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

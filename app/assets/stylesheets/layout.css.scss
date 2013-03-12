@@ -1,5 +1,5 @@
 body {
-  background: white;
+  /* background: #FDF7E2; */
   font-family: 'PT Sans', sans-serif;
 }
 
@@ -19,7 +19,7 @@ hr {
 }
 
 table {
-  font-size: 18px;
+  font-size: 16px;
   width: 100%;
 
   th {
@@ -36,6 +36,13 @@ input[type=text] {
   width: 300px;
 }
 
+ul.tagit {
+  background: white !important;
+  border: 2px solid black !important;
+  width: 300px;
+  padding: 7px;
+}
+
 .upload-btn {
   background: black;
   color: white;
@@ -47,6 +54,45 @@ input[type=text] {
 
 .field {
   margin-bottom: 10px;
+}
+
+.notice {
+  border: 2px solid green;
+  color: green;
+  padding: 10px;
+  margin: 15px 20px 0 20px;
+
+  a.close {
+    float: right;
+    color: green;
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+a.tag {
+  font-size: 12px;
+  padding: 2px;
+  border: 2px solid gray;
+  text-decoration: none;
+  
+  &,
+  &:active,
+  &:visited {
+    color: gray;
+  }
+
+  &:hover {
+    color: black;
+    border-color: black;
+    text-decoration: none;
+  }
+}
+
+.tag-group {
+  margin-right: 20px;
 }
 
 a {

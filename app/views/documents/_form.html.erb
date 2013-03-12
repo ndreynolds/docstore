@@ -20,12 +20,16 @@
   </div>
 
   <div class="field">
+    <%= f.text_field :raw_tags, :id => "tags" %>
+  </div>
+
+  <div class="field">
     <%= f.file_field :file %>
   </div>
 
   <div class="actions">
     <button type="submit" class="upload-btn"> 
-      <i class="icon-cloud-upload"></i> Upload
+      <i class="icon-cloud-upload"></i> <%= @document.id ? "Save" : "Upload" %>
     </button>
   </div>
 <% end %>
