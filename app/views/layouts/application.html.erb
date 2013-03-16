@@ -12,8 +12,18 @@
 </head>
 <body>
   <div class="header">
-    <%= link_to :controller => "documents" do %>
+    <%= link_to documents_path do %>
       <i class="icon-cloud"></i> DOCSTORE
+    <% end %>
+
+    <% if params[:controller] == 'documents' && params[:action] == 'index' %>
+      <button data-dialog="upload-dialog" class="btn btn-black open-form-btn"> 
+        <i class="icon-cloud-upload"></i> Upload
+      </button>
+    <% else %>
+      <%= link_to new_document_path, :class => 'btn btn-black open-form-btn' do %>
+        <i class="icon-cloud-upload"></i> Upload
+      <% end %>
     <% end %>
   </div>
 

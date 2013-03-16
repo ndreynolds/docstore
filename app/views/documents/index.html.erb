@@ -1,5 +1,3 @@
-<hr>
-
 <table>
   <tr>
     <th><%= sortable "title" %></th>
@@ -11,7 +9,16 @@
     <th></th>
   </tr>
 
-<% @documents.each do |document| %>
+<% if params[:tag] %>
+  Filtered to documents tagged
+  <%= link_to params[:tag], params.except(:offset).merge(:tag => params[:tag]), :class => 'tag' %>
+  <%= link_to params.except(:tag, :offset), :class => 'action-btn' do %>
+    <i class="icon-remove-sign"></i>
+  <% end %>
+  <hr>
+<% end %>
+
+<% next_offset = @documents.each do |document| %>
   <tr>
     <td>
       <i class="icon-file"></i>
@@ -44,16 +51,6 @@
 <% end %>
 </table>
 
-<hr>
-
-Showing <%= @count %> of <%= @count %> documents
-<% if params[:tag] %>
-  marked <%= link_to params[:tag], params.merge(:tag => params[:tag]), :class => 'tag' %>
-  <%= link_to params.except(:tag), :class => 'action-btn' do %>
-    <i class="icon-remove-sign"></i>
-  <% end %>
-<% end %>
-
-<hr>
-
-<%= render 'form' %>
+<div id="upload-dialog" class="dialog hidden">
+  <%= render 'form' %>
+</div>

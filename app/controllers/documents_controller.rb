@@ -6,13 +6,11 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @count = Document.count
-    @documents = Document.order(sort_column, sort_direction)
-    if params[:tag]
-      @documents = @documents.where(:tags => params[:tag])
-      @count = @documents.count
-    end
     @document = Document.new
+    @documents = Document.order(sort_column, sort_direction)
+
+    @documents = @documents.where(:tags => params[:tag]) if params[:tag]
+    @documents = @documents.offset(@offset) if @offset = params[:offset]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -99,7 +97,6 @@ class DocumentsController < ApplicationController
   end
 
   private
-
   def sort_column
     case params[:sort]
     when "author"
@@ -113,6 +110,7 @@ class DocumentsController < ApplicationController
     end
   end
 
+  private
   def sort_direction
     case params[:direction]
     when "desc"

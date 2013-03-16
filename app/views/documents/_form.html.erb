@@ -24,12 +24,18 @@
   </div>
 
   <div class="field">
-    <%= f.file_field :file %>
+    <label class="btn file-btn">
+      <i class="icon-file-alt"></i>
+      Choose a file...
+      <%= f.file_field :file, {"data-file-val" => "file-val"} %>
+    </label>
+    <span id="file-val"></span>
   </div>
 
   <div class="actions">
-    <button type="submit" class="upload-btn"> 
+    <button type="submit" class="btn btn-black"> 
       <i class="icon-cloud-upload"></i> <%= @document.id ? "Save" : "Upload" %>
     </button>
+    <%= link_to "Cancel", documents_path, :class => "btn cancel-btn" %>
   </div>
 <% end %>

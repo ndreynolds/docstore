@@ -23,3 +23,23 @@ $ ->
   $('#tags').tagit 
     autocomplete: {source: getTags}
     placeholderText: 'Tags'
+
+  $('ul.tagit input')
+    .on 'focus', ->
+      $('ul.tagit').css 'border-color': '#08c'
+    .on 'blur', ->
+      $('ul.tagit').css 'border-color': '#000'
+
+  $('#document_file').change ->
+    id = $(@).data('file-val')
+    $('#' + id).html $(@).val().split('\\').pop()
+
+  $('[data-dialog]').click ->
+    id = $(@).data('dialog')
+    $dialog = $('#' + id)
+    $dialog
+      .show()
+      .find('.cancel-btn').click ->
+        console.log 'boom'
+        $dialog.hide()
+        false
