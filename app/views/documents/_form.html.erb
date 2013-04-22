@@ -1,4 +1,4 @@
-<%= form_for(@document) do |f| %>
+<%= form_for(@document, :html => {class: 'document-form'}) do |f| %>
   <% if @document.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -24,7 +24,7 @@
   </div>
 
   <div class="field">
-    <label class="btn file-btn">
+    <label id="file-btn" class="btn">
       <i class="icon-file-alt"></i>
       Choose a file...
       <%= f.file_field :file, {"data-file-val" => "file-val"} %>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="actions">
-    <button type="submit" class="btn btn-black"> 
+    <button type="submit" class="btn btn-dark"> 
       <i class="icon-cloud-upload"></i> <%= @document.id ? "Save" : "Upload" %>
     </button>
     <%= link_to "Cancel", documents_path, :class => "btn cancel-btn" %>

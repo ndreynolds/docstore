@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Docstore</title>
+  <title>DOCSTORE</title>
   <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <script type="text/javascript">
@@ -16,25 +16,37 @@
       <i class="icon-cloud"></i> DOCSTORE
     <% end %>
 
+    <% if flash[:notice] %>
+      <div class="notice">
+        <%= flash[:notice] %>
+        <a class="close"><i class="icon-remove-circle"></i></a>
+      </div>
+    <% end %>
+
     <% if params[:controller] == 'documents' && params[:action] == 'index' %>
-      <button data-dialog="upload-dialog" class="btn btn-black open-form-btn"> 
+
+      <button data-dialog="upload-dialog" id="form-open-btn" class="btn btn-dark"> 
         <i class="icon-cloud-upload"></i> Upload
       </button>
+
+      <div class="view-options">
+        <%= link_to params.merge(:view => 'grid'), :class => params[:view] == 'list' ? '' : 'active' do %>
+          <i class="icon-large icon-th"></i>
+        <% end %>
+        <%= link_to params.merge(:view => 'list'), :class => params[:view] == 'list' ? 'active' : '' do %>
+          <i class="icon-large icon-list"></i>
+        <% end %>
+      </div>
+
     <% else %>
-      <%= link_to new_document_path, :class => 'btn btn-black open-form-btn' do %>
+
+      <%= link_to new_document_path, :id => 'form-open-btn', :class => 'btn btn-dark' do %>
         <i class="icon-cloud-upload"></i> Upload
       <% end %>
+
     <% end %>
   </div>
 
-  <% if flash[:notice] %>
-    <div class="notice">
-      <%= flash[:notice] %>
-      <a class="close"><i class="icon-remove-circle"></i></a>
-    </div>
-  <% end %>
-
   <%= yield %>
-
 </body>
 </html>

@@ -11,3 +11,30 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+  font-family: 'PT Sans', sans-serif;
+}
+
+h2 {
+  margin: 0 20px 0 0;
+  display: inline;
+}
+
+h3 {
+  font-weight: 300;
+  margin: 5px 0;
+}
+
+hr {
+  border: 1px solid black;
+  margin: 15px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.dimmed {
+  opacity: 0.5;
+}

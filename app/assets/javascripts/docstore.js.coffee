@@ -2,33 +2,32 @@
 # ---------------
 
 # autocomplete.source: get the tags from the server once and filter client-side.
-getTags = do ->
+autocompleteTags = do ->
   tags = []
   filter = (arr, term) ->
     return [] unless term
     $.map arr, (el) -> 
-      if el.length and term.length and el.substring(0, term.length) == term
-        el
+      el if (el.length and term.length and el.substring(0, term.length) == term)
   (request, response) ->
     if tags.length
       response filter(tags, request.term)
     else
       $.getJSON "#{SERVER_ROOT}/documents/tags.json", (data) ->
-        response filter(tags = data)
+        response filter(tags = data, request.term)
 
 $ ->
   $('.notice a.close').click ->
     $(@).parent().remove()
 
   $('#tags').tagit 
-    autocomplete: {source: getTags}
+    autocomplete: { source: autocompleteTags }
     placeholderText: 'Tags'
 
   $('ul.tagit input')
     .on 'focus', ->
-      $('ul.tagit').css 'border-color': '#08c'
+      $('ul.tagit').addClass('active')
     .on 'blur', ->
-      $('ul.tagit').css 'border-color': '#000'
+      $('ul.tagit').removeClass('active')
 
   $('#document_file').change ->
     id = $(@).data('file-val')
@@ -37,9 +36,6 @@ $ ->
   $('[data-dialog]').click ->
     id = $(@).data('dialog')
     $dialog = $('#' + id)
-    $dialog
-      .show()
-      .find('.cancel-btn').click ->
-        console.log 'boom'
-        $dialog.hide()
-        false
+    $dialog.show().find('.cancel-btn').click ->
+      $dialog.hide()
+      false

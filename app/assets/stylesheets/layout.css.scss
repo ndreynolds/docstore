@@ -1,47 +1,67 @@
-body {
-  /* background: #FDF7E2; */
-  font-family: 'PT Sans', sans-serif;
+.header {
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 17px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid black;
+  a:hover {
+    text-decoration: none;
+  }
+  #form-open-btn {
+    float: right;
+    margin-top: -8px;
+  }
+  .view-options {
+    padding: 5px;
+    float: right;
+    margin-right: 20px;
+    position: relative;
+    bottom: 5px;
+    a {
+      color: gray;
+      &:first-child {
+        margin-right: 7px;
+        border-right: 3px solid black;
+      }
+      &:hover,
+      &.active {
+        color: black;
+      }
+    }
+  }
 }
 
-h2 {
-  margin: 0 20px 0 0;
+.notice {
+  border: 2px solid green;
+  color: green;
+  padding: 10px;
+  margin: 15px 20px 0 20px;
+  font-size: 15px;
   display: inline;
-}
 
-h3 {
-  font-weight: 300;
-  margin: 5px 0;
-}
-
-hr {
-  border: 1px solid black;
-  margin: 15px 0;
-}
-
-table {
-  font-size: 16px;
-  width: 100%;
-
-  th {
-    text-align: left;
-  }
-
-  th a.current {
-    &.asc:after {
-      content: " \25B4"
-    }
-    &.desc:after {
-      content: " \25BE"
+  a.close {
+    margin-left: 10px;
+    color: green;
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
     }
   }
 }
 
-.hidden {
-  display: none;
-}
-
-.dimmed {
-  opacity: 0.5;
+.dialog {
+  position: absolute;
+  width: 320px;
+  top: 50%;
+  left: 50%;
+  margin-left: -160px;
+  margin-top: -130px;
+  background: white;
+  border: 2px solid black;
+  padding: 20px;
+  -moz-box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+  -webkit-box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+  box-shadow: 0 7px 7px rgba(0,0,0,0.7);
 }
 
 input[type=text] {
@@ -57,16 +77,6 @@ input[type=text] {
   }
 }
 
-input[type=file] {
-  display: none;
-}
-
-ul.tagit {
-  width: 300px;
-  padding: 7px;
-  margin: 12px 0;
-}
-
 .btn {
   border: 2px solid black;
   font-size: 17px;
@@ -79,7 +89,7 @@ ul.tagit {
   }
 }
 
-.btn-black {
+.btn-dark {
   background: black;
   &, 
   &:visited,
@@ -87,73 +97,6 @@ ul.tagit {
   &:hover {
     color: white;
   }
-}
-
-.file-btn {
-  display: inline;
-  line-height: 40px;
-  width: 125px;
-  margin: 15px 0;
-}
-
-#file-val {
-  display: inline;
-  margin-left: 10px;
-}
-
-.open-form-btn {
-  float: right;
-  margin-top: -8px;
-}
-
-.form-wrapper {
-  width: 320px;
-  margin: 50px auto;
-  border: 2px solid black;
-  padding: 20px;
-}
-
-.field {
-  margin-bottom: 10px;
-}
-
-.notice {
-  border: 2px solid green;
-  color: green;
-  padding: 10px;
-  margin: 15px 20px 0 20px;
-
-  a.close {
-    float: right;
-    color: green;
-    &:hover {
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-}
-
-a.tag {
-  font-size: 12px;
-  padding: 2px;
-  border: 2px solid gray;
-  text-decoration: none;
-  
-  &,
-  &:active,
-  &:visited {
-    color: gray;
-  }
-
-  &:hover {
-    color: black;
-    border-color: black;
-    text-decoration: none;
-  }
-}
-
-.tag-group {
-  margin-right: 20px;
 }
 
 a {
@@ -174,30 +117,38 @@ a {
     text-decoration: none;
     color: black;
   }
-}
-
-.header {
-  font-size: 20px;
-  padding-top: 10px;
-  padding-bottom: 17px;
-  margin-bottom: 15px;
-  a:hover {
+  &.tag {
+    font-size: 12px;
+    padding: 2px;
+    border: 2px solid gray;
     text-decoration: none;
+    
+    &,
+    &:active,
+    &:visited {
+      color: gray;
+    }
+
+    &:hover {
+      color: black;
+      border-color: black;
+      text-decoration: none;
+    }
   }
-  border-bottom: 2px solid black;
 }
 
-.dialog {
-  position: absolute;
-  width: 320px;
-  top: 50%;
-  left: 50%;
-  margin-left: -160px;
-  margin-top: -130px;
-  background: white;
-  border: 2px solid black;
-  padding: 20px;
-  -moz-box-shadow: 0 7px 7px rgba(0,0,0,0.7);
-  -webkit-box-shadow: 0 7px 7px rgba(0,0,0,0.7);
-  box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+// Additional tweaks to tag-it styling
+
+ul.tagit {
+  width: 300px;
+  padding: 7px;
+  margin: 12px 0;
+
+  &.active {
+    border-color: #08c;
+  }
+}
+
+.tag-group {
+  margin-right: 20px;
 }

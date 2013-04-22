@@ -1,0 +1,79 @@
+.documents {
+  .document {
+    &.document-grid {
+      float: left;
+      margin: 20px;
+      width: 165px;
+      height: 150px;
+      text-align: center;
+      .image-wrapper {
+        position: relative;
+        height: 135px;
+        img {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          left: 0;
+          right: 0;
+          border: 1px solid #333;
+          min-height: 50px;
+        }
+      }
+      a {
+        display: block;
+        font-size: 12px;
+      }
+      a.tag {
+        display: inline;
+      }
+    }
+  }
+
+  table {
+    font-size: 16px;
+    width: 100%;
+
+    th {
+      text-align: left;
+    }
+
+    th a.current {
+      &.asc:after {
+        content: " \25B4"
+      }
+      &.desc:after {
+        content: " \25BE"
+      }
+    }
+  }
+}
+
+.document-form-wrapper {
+  width: 320px;
+  margin: 50px auto;
+  border: 2px solid black;
+  padding: 20px;
+}
+
+.document-form {
+  .field {
+    margin-bottom: 10px;
+  }
+
+  input[type=file] {
+    display: none;
+  }
+
+  #file-btn {
+    display: inline;
+    line-height: 40px;
+    width: 125px;
+    margin: 15px 0;
+  }
+
+  #file-val {
+    display: inline;
+    margin-left: 10px;
+  }
+}
