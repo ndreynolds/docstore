@@ -7,7 +7,7 @@
 </span>
 
 <span class="actions-group">
-  <%= link_to @document.file_url.to_s, :class => 'action-btn', :target => '_blank' do %>
+  <%= link_to @document.file_url.to_s, :class => 'action-btn', :download => @document.filename do %>
     <i class="icon-cloud-download icon-large"></i>
   <% end %>
   <%= link_to edit_document_path(@document), :class => 'action-btn' do %>

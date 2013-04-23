@@ -27,7 +27,7 @@
       <td><a href="<%= document.file_url %>"><%= document.filename %></a></td>
       <td><%= time_ago_in_words(document.created_at) %> ago</td>
       <td>
-        <%= link_to document.file_url.to_s, :class => 'action-btn', :target => '_blank' do %>
+        <%= link_to document.file_url.to_s, :class => 'action-btn', :download => document.filename do %>
           <i class="icon-cloud-download"></i>
         <% end %>
       </td>
