@@ -63,6 +63,11 @@ module Docstore
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Create thumbnails with ImageMagick when enabled
     config.thumbnails_enabled = true
+
+    # AWS identifiers
+    config.s3_bucket_id = ENV['DOCSTORE_S3_BUCKET_ID']
+    config.sdb_domain = ENV['DOCSTORE_SDB_DOMAIN']
   end
 end

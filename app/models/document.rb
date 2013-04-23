@@ -5,6 +5,12 @@ class Document < AWS::Record::Base
   string_attr :tags, :set => true
   timestamps
 
+  def initialize(*args)
+    raise 'DOCSTORE_SDB_DOMAIN not set' if Rails.configuration.sdb_domain.blank?
+    self.class.set_domain_name Rails.configuration.sdb_domain
+    super
+  end
+
   def file=(file)
     self.filename = file.original_filename
     @file = file
@@ -53,8 +59,8 @@ class Document < AWS::Record::Base
   protected
 
   def s3_obj key
-    bucket_id = ENV['AWS_S3_BUCKET_ID']
-    AWS::S3.new.buckets[bucket_id].objects[key]
+    raise '$DOCSTORE_S3_BUCKET_ID not set' if Rails.configuration.s3_bucket_id.blank?
+    AWS::S3.new.buckets[Rails.configuration.s3_bucket_id].objects[key]
   end
 
   def file_s3_obj

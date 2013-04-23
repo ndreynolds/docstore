@@ -41,6 +41,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.1)
+    colorize (0.5.8)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -117,6 +118,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   coffee-rails (~> 3.2.1)
+  colorize
   foreman
   jquery-rails
   mini_magick (~> 3.4)
