@@ -1,43 +1,47 @@
 <table>
-  <tr>
-    <th><%= sortable "title" %></th>
-    <th><%= sortable "author" %></th>
-    <th>Tags</th>
-    <th><%= sortable "filename" %></th>
-    <th><%= sortable "created_at", "Added" %></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th><%= sortable "title" %></th>
+      <th><%= sortable "author" %></th>
+      <th>Tags</th>
+      <th><%= sortable "filename" %></th>
+      <th><%= sortable "created_at", "Added" %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% next_offset = @documents.each do |document| %>
-  <tr>
-    <td>
-      <i class="icon-file"></i>
-      <%= link_to truncate(document.title, :length => 50), document  %>
-    </td>
-    <td><%= document.author %></td>
-    <td>
-      <% document.tags.sort.each do |tag| %>
-        <%= link_to tag, params.merge(:tag => tag), :class => 'tag' %>
-      <% end %>
-    </td>
-    <td><a href="<%= document.file_url %>"><%= document.filename %></a></td>
-    <td><%= time_ago_in_words(document.created_at) %> ago</td>
-    <td>
-      <%= link_to document.file_url.to_s, :class => 'action-btn', :target => '_blank' do %>
-        <i class="icon-cloud-download"></i>
-      <% end %>
-    </td>
-    <td>
-      <%= link_to edit_document_path(document), :class => 'action-btn' do %>
-        <i class="icon-pencil"></i>
-      <% end %>
-    </td>
-    <td>
-      <%= link_to document, :class => 'action-btn', method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <i class="icon-trash"></i>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
+  <tbody>
+  <% next_offset = @documents.each do |document| %>
+    <tr>
+      <td>
+        <i class="icon-file"></i>
+        <%= link_to truncate(document.title, :length => 50), document  %>
+      </td>
+      <td><%= document.author %></td>
+      <td>
+        <% document.tags.sort.each do |tag| %>
+          <%= link_to tag, params.merge(:tag => tag), :class => 'tag' %>
+        <% end %>
+      </td>
+      <td><a href="<%= document.file_url %>"><%= document.filename %></a></td>
+      <td><%= time_ago_in_words(document.created_at) %> ago</td>
+      <td>
+        <%= link_to document.file_url.to_s, :class => 'action-btn', :target => '_blank' do %>
+          <i class="icon-cloud-download"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to edit_document_path(document), :class => 'action-btn' do %>
+          <i class="icon-pencil"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to document, :class => 'action-btn', method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="icon-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
 </table>

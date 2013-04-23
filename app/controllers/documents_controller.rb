@@ -97,6 +97,7 @@ class DocumentsController < ApplicationController
   end
 
   private
+
   def sort_column
     case params[:sort]
     when "author"
@@ -110,13 +111,7 @@ class DocumentsController < ApplicationController
     end
   end
 
-  private
   def sort_direction
-    case params[:direction]
-    when "desc"
-      :desc
-    else
-      :asc
-    end
+    params[:direction] == :desc ? :desc : :asc
   end
 end

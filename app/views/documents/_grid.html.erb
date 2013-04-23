@@ -8,4 +8,14 @@
     <%= link_to truncate(document.title, :length => 25), document, :title => document.title  %>
   </div>
 <% end %>
+
+<% if @documents.count == 0 %>
+  <div class="empty">
+    <h1>Welcome to your <strong>docstore</strong></h1>
+    You don't have any documents yet.
+    <br>
+    Try <strong><%= link_to 'uploading', new_document_path %></strong> a new one.
+
+  </div>
+<% end %>
 </div>
