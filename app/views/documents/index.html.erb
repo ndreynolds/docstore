@@ -7,6 +7,15 @@
   <hr>
 <% end %>
 
+<% if params[:search] %>
+  Filtered to documents matching
+  <%= link_to params[:search], params.except(:offset).merge(:search => params[:search]), :class => 'tag' %>
+  <%= link_to params.except(:search, :offset), :class => 'action-btn' do %>
+    <i class="icon-remove-sign"></i>
+  <% end %>
+  <hr>
+<% end %>
+
 <div class="documents">
   <%= render params[:view] == 'list' ? 'table' : 'grid' %>
 </div>

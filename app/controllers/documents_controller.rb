@@ -9,7 +9,9 @@ class DocumentsController < ApplicationController
     @document = Document.new
     @documents = Document.order(sort_column, sort_direction)
 
-    @documents = @documents.where(:tags => params[:tag]) if params[:tag]
+    @documents = apply_tag    if params.has_key? :tag
+    @documents = apply_search if params.has_key? :search
+
     @documents = @documents.offset(@offset) if @offset = params[:offset]
 
     respond_to do |format|
@@ -97,6 +99,17 @@ class DocumentsController < ApplicationController
   end
 
   private
+
+  def apply_tag
+    @documents.where(:tags => params[:tag])
+  end
+
+  def apply_search
+    # SimpleDB requires that the query references the sort column
+    where_cond = "search_data like ? and #{sort_column} is not null"
+    query = params[:search].downcase
+    @documents.where(where_cond, "%#{query}%")
+  end
 
   def sort_column
     case params[:sort]

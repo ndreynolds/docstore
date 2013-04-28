@@ -16,7 +16,7 @@
     <tr>
       <td>
         <i class="icon-file"></i>
-        <%= link_to truncate(document.title, :length => 50), document  %>
+        <%= link_to truncate(document.title, :length => 50), document, :title => document.title  %>
       </td>
       <td><%= document.author %></td>
       <td>

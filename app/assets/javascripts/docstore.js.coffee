@@ -1,7 +1,7 @@
 # docstore.coffee
 # ---------------
 
-# autocomplete.source: get the tags from the server once and filter client-side.
+# Get tags for autocompletion from the server *once* and filter client-side.
 autocompleteTags = do ->
   tags = []
   filter = (arr, term) ->
@@ -14,6 +14,15 @@ autocompleteTags = do ->
     else
       $.getJSON "#{SERVER_ROOT}/documents/tags.json", (data) ->
         response filter(tags = data, request.term)
+
+# Update or add a query parameter
+updateQueryParam = (uri, key, value) ->
+  re = new RegExp('([?|&])' + key + '=.*?(&|$)', 'i')
+  if uri.match(re)
+    return uri.replace(re, "$1#{key}=#{value}$2")
+  sep = if uri.indexOf('?') isnt -1 then '&' else '?'
+  "#{uri}#{sep}#{key}=#{value}"
+
 
 $ ->
   $('.notice a.close').click ->
@@ -39,3 +48,8 @@ $ ->
     $dialog.show().find('.cancel-btn').click ->
       $dialog.hide()
       false
+
+  $('input.search').keypress (e) ->
+    return unless e.which == 13
+    location.href = updateQueryParam location.href, 'search', $(@).val()
+    false

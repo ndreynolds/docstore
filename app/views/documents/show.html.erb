@@ -8,13 +8,13 @@
 
 <span class="actions-group">
   <%= link_to @document.file_url.to_s, :class => 'action-btn', :download => @document.filename do %>
-    <i class="icon-cloud-download icon-large"></i>
+    <i class="icon-cloud-download icon-large" title="Download"></i>
   <% end %>
   <%= link_to edit_document_path(@document), :class => 'action-btn' do %>
-    <i class="icon-pencil icon-large"></i>
+    <i class="icon-pencil icon-large" title="Edit"></i>
   <% end %>
   <%= link_to @document, :class => 'action-btn', method: :delete, data: { confirm: 'Are you sure?' } do %>
-    <i class="icon-trash icon-large"></i>
+    <i class="icon-trash icon-large" title="Delete"></i>
   <% end %>
 </span>
 

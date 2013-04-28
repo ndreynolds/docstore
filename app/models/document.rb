@@ -3,8 +3,10 @@ class Document < AWS::Record::Base
   string_attr :author
   string_attr :filename
   string_attr :tags, :set => true
+  string_attr :search_data
   timestamps
 
+  # Set the SimpleDB domain name from the configuration.
   def initialize(*args)
     raise 'DOCSTORE_SDB_DOMAIN not set' if Rails.configuration.sdb_domain.blank?
     self.class.set_domain_name Rails.configuration.sdb_domain
@@ -34,19 +36,9 @@ class Document < AWS::Record::Base
   end
 
   def save
+    update_search_data
     result = super
-    if @file
-      if Rails.configuration.thumbnails_enabled
-        image = MiniMagick::Image.read @file 
-        image.format 'png'
-        image.resize '128x128'
-        path = "#{Rails.root}/tmp/#{id}_#{Process.pid}"
-        image.write(path)
-        file_s3_obj_thumb.write(File.open(path), :content_type => 'image/png')
-      end
-
-      file_s3_obj.write(@file.read, :content_type => @file.content_type)
-    end
+    upload_to_s3 if @file
     result
   end
 
@@ -58,6 +50,30 @@ class Document < AWS::Record::Base
 
   protected
 
+  # SimpleDB doesn't support case-insensitive search, so we store the concatenated,
+  # downcased search fields in the search_data column and search that.
+  def update_search_data
+    self.search_data = [self.title, self.author, self.filename].join('|')
+      .downcase
+      .squeeze(' ')
+      .gsub(/[^a-z\s|]/, '')
+  end
+
+  # Pass on an uploaded file to S3, also creating a thumbnail when configured.
+  def upload_to_s3
+    if Rails.configuration.thumbnails_enabled
+      image = MiniMagick::Image.read @file 
+      image.format 'png'
+      image.resize '128x128'
+      path = "#{Rails.root}/tmp/#{id}_#{Process.pid}"
+      image.write(path)
+      file_s3_obj_thumb.write(File.open(path), :content_type => 'image/png')
+    end
+
+    file_s3_obj.write(@file.read, :content_type => @file.content_type)
+  end
+
+  # Return an AWS::S3:S3Object with the given key from the configured bucket.
   def s3_obj key
     raise '$DOCSTORE_S3_BUCKET_ID not set' if Rails.configuration.s3_bucket_id.blank?
     AWS::S3.new.buckets[Rails.configuration.s3_bucket_id].objects[key]
