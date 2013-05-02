@@ -9,6 +9,12 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require 'font-awesome.min'
+ *= require 'jquery-ui'
+ *= require 'jquery.tagit'
+ *= require 'tagit.ui-zendesk'
+ *= require 'layout'
+ *= require 'documents'
  *= require_tree .
  */
 
