@@ -66,7 +66,7 @@ class Document < AWS::Record::Base
 
       image = MiniMagick::Image.read @file.tempfile
       image.limit 'memory', Rails.configuration.imagemagick_memory_limit
-      image.format 'png'
+      image.format 'png', 0
       image.resize '128x128'
       image.write(path)
       image.destroy!
