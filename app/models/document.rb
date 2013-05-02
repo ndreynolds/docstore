@@ -64,14 +64,12 @@ class Document < AWS::Record::Base
     if Rails.configuration.thumbnails_enabled
       path = "#{Rails.root}/tmp/#{id}_#{Process.pid}"
 
-      image = MiniMagick::Image.read @file
+      image = MiniMagick::Image.read @file.tempfile
       image.limit 'memory', Rails.configuration.imagemagick_memory_limit
       image.format 'png'
       image.resize '128x128'
       image.write(path)
-
-      image = nil
-      GC.start
+      image.destroy!
 
       File.open(path) do |fp|
         file_s3_obj_thumb.write(fp, :content_type => 'image/png')

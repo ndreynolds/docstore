@@ -121,7 +121,7 @@ DEPENDENCIES
   colorize
   foreman
   jquery-rails
-  mini_magick (~> 3.4)
+  mini_magick (~> 3.5)
   psych (~> 1.2)
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
