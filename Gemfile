@@ -4,7 +4,6 @@ gem 'rails', '3.2.12'
 gem 'aws-sdk'
 gem 'foreman'
 gem 'psych', '~> 1.2'
-gem 'mini_magick', '~> 3.5'
 gem 'colorize'
 
 # Gems used only for assets and not required

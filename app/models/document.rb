@@ -62,19 +62,13 @@ class Document < AWS::Record::Base
   # Pass on an uploaded file to S3, also creating a thumbnail when configured.
   def upload_to_s3
     if Rails.configuration.thumbnails_enabled
-      path = "#{Rails.root}/tmp/#{id}_#{Process.pid}"
+      path = "#{Rails.root}/tmp/#{id}_#{Process.pid}.png"
+      `convert #{@file.tempfile.path}[0] -scale 128x128 #{path}`
 
-      image = MiniMagick::Image.read @file.tempfile
-      image.limit 'memory', Rails.configuration.imagemagick_memory_limit
-      image.format 'png', 0
-      image.resize '128x128'
-      image.write(path)
-      image.destroy!
-
-      File.open(path) do |fp|
-        file_s3_obj_thumb.write(fp, :content_type => 'image/png')
+      if File.exists? path
+        file_s3_obj_thumb.write(:file => path, :content_type => 'image/png')
+        File.delete(path)
       end
-      File.delete(path)
     end
 
     file_s3_obj.write(@file.tempfile.open, :content_type => @file.content_type)
