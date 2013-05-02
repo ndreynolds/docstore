@@ -65,6 +65,7 @@ module Docstore
 
     # Create thumbnails with ImageMagick when enabled
     config.thumbnails_enabled = true
+    config.imagemagick_memory_limit = '250MB'
 
     # AWS identifiers
     config.s3_bucket_id = ENV['DOCSTORE_S3_BUCKET_ID']
