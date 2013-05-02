@@ -18,6 +18,8 @@
           right: 0;
           border: 1px solid #333;
           min-height: 50px;
+          opacity: 0;
+          transition: opacity 1s;
         }
       }
       a {
@@ -71,19 +73,23 @@
     margin-bottom: 10px;
   }
 
+  h2 {
+    font-size: 18px;
+  }
+
   input[type=file] {
     display: none;
   }
 
   #file-btn {
-    display: inline;
-    line-height: 40px;
-    width: 125px;
-    margin: 15px 0;
+    font-size: 15px;
   }
 
   #file-val {
-    display: inline;
-    margin-left: 10px;
+    float: right;
+    height: 20px;
+    margin-top: 10px;
+    width: 160px;
+    overflow: hidden;
   }
 }

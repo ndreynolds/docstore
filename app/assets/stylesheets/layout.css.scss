@@ -4,13 +4,23 @@
   padding-bottom: 17px;
   margin-bottom: 15px;
   border-bottom: 2px solid black;
+
+  a.logo {
+    background: url('logo.png') no-repeat;
+    padding-left: 35px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }
+
   a:hover {
     text-decoration: none;
   }
+
   #form-open-btn {
     float: right;
     margin-top: -8px;
   }
+
   .view-options {
     padding: 5px;
     float: right;
@@ -29,6 +39,7 @@
       }
     }
   }
+
   .search {
     float: right;
     border-radius: 10px;
@@ -87,6 +98,10 @@ input[type=text] {
   &:focus {
     border-color: #08c;
   }
+}
+
+.field_with_errors input[type=text] {
+  border-color: #bc3522;
 }
 
 .btn {

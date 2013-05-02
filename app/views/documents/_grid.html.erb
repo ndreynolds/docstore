@@ -3,6 +3,7 @@
   <div class="document document-grid">
     <div class="image-wrapper">
       <%= link_to image_tag(document.thumb_url, 
+            :onLoad => "this.style.opacity='1'",
             :onError => "this.src = '#{image_path('document.png')}'"), document %>
     </div>
     <%= link_to truncate(document.title, :length => 25), document, :title => document.title  %>

@@ -42,6 +42,10 @@ $ ->
     id = $(@).data('file-val')
     $('#' + id).html $(@).val().split('\\').pop()
 
+  $('#file-btn').click ->
+    $('#document_file').trigger('click')
+    false
+
   $('[data-dialog]').click ->
     id = $(@).data('dialog')
     $dialog = $('#' + id)

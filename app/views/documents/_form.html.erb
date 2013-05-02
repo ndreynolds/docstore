@@ -24,12 +24,12 @@
   </div>
 
   <div class="field">
-    <label id="file-btn" class="btn">
+    <%= f.file_field :file, {"data-file-val" => "file-val"} %>
+    <button id="file-btn" class="btn">
       <i class="icon-file-alt"></i>
       Choose a file...
-      <%= f.file_field :file, {"data-file-val" => "file-val"} %>
-    </label>
-    <span id="file-val"></span>
+    </button>
+    <div id="file-val"></div>
   </div>
 
   <div class="actions">

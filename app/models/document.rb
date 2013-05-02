@@ -6,6 +6,8 @@ class Document < AWS::Record::Base
   string_attr :search_data
   timestamps
 
+  validates_presence_of :title, :author
+
   # Set the SimpleDB domain name from the configuration.
   def initialize(*args)
     raise 'DOCSTORE_SDB_DOMAIN not set' if Rails.configuration.sdb_domain.blank?

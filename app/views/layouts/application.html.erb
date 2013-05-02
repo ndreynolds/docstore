@@ -12,8 +12,8 @@
 </head>
 <body>
   <div class="header">
-    <%= link_to documents_path do %>
-      <i class="icon-cloud"></i> DOCSTORE
+    <%= link_to documents_path, :class => 'logo' do %>
+      DOCSTORE
     <% end %>
 
     <% if flash[:notice] %>
