@@ -2,7 +2,7 @@ class Document < AWS::Record::Base
   string_attr :title
   string_attr :author
   string_attr :filename
-  string_attr :tags, :set => true
+  string_attr :tags, set: true
   string_attr :search_data
   timestamps
 
@@ -12,6 +12,10 @@ class Document < AWS::Record::Base
   def initialize(*args)
     raise 'DOCSTORE_SDB_DOMAIN not set' if Rails.configuration.sdb_domain.blank?
     self.class.set_domain_name Rails.configuration.sdb_domain
+
+    raise '$DOCSTORE_S3_BUCKET_ID not set' if Rails.configuration.s3_bucket_id.blank?
+    @sobjects = AWS::S3.new.buckets[Rails.configuration.s3_bucket_id].objects
+
     super
   end
 
@@ -26,7 +30,7 @@ class Document < AWS::Record::Base
   end
 
   def raw_tags
-    tags.to_a.join(',')
+    self.tags.to_a.join(',')
   end
 
   def file_url
@@ -40,7 +44,7 @@ class Document < AWS::Record::Base
   def save
     update_search_data
     result = super
-    upload_to_s3 if @file
+    upload_file if @file
     result
   end
 
@@ -52,8 +56,9 @@ class Document < AWS::Record::Base
 
   protected
 
-  # SimpleDB doesn't support case-insensitive search, so we store the concatenated,
-  # downcased search fields in the search_data column and search that.
+  # SimpleDB doesn't support case-insensitive search, so we instead store the
+  # concatenated, downcased search fields in the search_data column and search
+  # that.
   def update_search_data
     self.search_data = [self.title, self.author, self.filename].join('|')
       .downcase
@@ -62,31 +67,27 @@ class Document < AWS::Record::Base
   end
 
   # Pass on an uploaded file to S3, also creating a thumbnail when configured.
-  def upload_to_s3
-    if Rails.configuration.thumbnails_enabled
-      path = "#{Rails.root}/tmp/#{id}_#{Process.pid}.png"
-      `convert #{@file.tempfile.path}[0] -scale 128x128 #{path}`
-
-      if File.exists? path
-        file_s3_obj_thumb.write(:file => path, :content_type => 'image/png')
-        File.delete(path)
-      end
-    end
-
-    file_s3_obj.write(@file.tempfile.open, :content_type => @file.content_type)
+  def upload_file
+    upload_thumb if Rails.configuration.thumbnails_enabled
+    file_s3_obj.write(@file.tempfile.open, content_type: @file.content_type)
   end
 
-  # Return an AWS::S3:S3Object with the given key from the configured bucket.
-  def s3_obj key
-    raise '$DOCSTORE_S3_BUCKET_ID not set' if Rails.configuration.s3_bucket_id.blank?
-    AWS::S3.new.buckets[Rails.configuration.s3_bucket_id].objects[key]
+  # Create a thumbnail with Imagemagick and upload it to S3
+  def upload_thumb
+    path = "#{Rails.root}/tmp/#{id}_#{Process.pid}.png"
+    `convert #{@file.tempfile.path}[0] -scale 128x128 #{path}`
+
+    if File.exists? path
+      file_s3_obj_thumb.write(file: path, content_type: 'image/png')
+      File.delete(path)
+    end
   end
 
   def file_s3_obj
-    s3_obj "#{id}/#{filename}"
+    @sobjects["#{id}/#{filename}"]
   end
 
   def file_s3_obj_thumb
-    s3_obj "#{id}/#{filename}.thumb.png"
+    @sobjects["#{id}/#{filename}.thumb.png"]
   end
 end

@@ -61,6 +61,13 @@
   }
 }
 
+@media (max-width: 1200px) {
+  th.medium-hidden,
+  td.medium-hidden {
+    display: none;
+  }
+}
+
 .document-form-wrapper {
   width: 320px;
   margin: 50px auto;

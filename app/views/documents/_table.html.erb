@@ -4,9 +4,8 @@
       <th><%= sortable "title" %></th>
       <th><%= sortable "author" %></th>
       <th>Tags</th>
-      <th><%= sortable "filename" %></th>
-      <th><%= sortable "created_at", "Added" %></th>
-      <th></th>
+      <th class="medium-hidden"><%= sortable "filename" %></th>
+      <th class="medium-hidden"><%= sortable "created_at", "Added" %></th>
       <th></th>
     </tr>
   </thead>
@@ -24,8 +23,8 @@
           <%= link_to tag, params.merge(:tag => tag), :class => 'tag' %>
         <% end %>
       </td>
-      <td><a href="<%= document.file_url %>"><%= document.filename %></a></td>
-      <td><%= time_ago_in_words(document.created_at) %> ago</td>
+      <td class="medium-hidden"><a href="<%= document.file_url %>"><%= document.filename %></a></td>
+      <td class="medium-hidden"><%= time_ago_in_words(document.created_at) %> ago</td>
       <td>
         <%= link_to document.file_url.to_s, :class => 'action-btn', :download => document.filename do %>
           <i class="icon-cloud-download"></i>

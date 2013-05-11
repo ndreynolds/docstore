@@ -30,8 +30,11 @@ Docstore::Application.configure do
   config.action_mailer.delivery_method = :test
 
   # Raise exception on mass assignment protection for Active Record models
-  config.active_record.mass_assignment_sanitizer = :strict
+  #config.active_record.mass_assignment_sanitizer = :strict
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.s3_bucket_id = 'docstore-test'
+  config.sdb_domain = 'docstore-test'
 end

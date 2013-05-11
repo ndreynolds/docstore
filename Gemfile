@@ -1,10 +1,16 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'aws-sdk'
 gem 'foreman'
 gem 'psych', '~> 1.2'
 gem 'colorize'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

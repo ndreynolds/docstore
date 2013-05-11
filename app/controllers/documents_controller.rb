@@ -67,14 +67,13 @@ class DocumentsController < ApplicationController
   # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
-    @result = @document.update_attributes(params[:document])
 
     respond_to do |format|
-      if @result
+      if @document.update_attributes(params[:document])
         format.html { redirect_to documents_path, notice: 'Document was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render edit_documents_path }
+        format.html { render :edit }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
@@ -84,24 +83,26 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @document = Document.find(params[:id])
-    @document.destroy
+    if not @document.destroy
+      flash[:error] = 'There was an error deleting the document'
+    end
 
     respond_to do |format|
-      format.html { redirect_to documents_url }
+      format.html { redirect_to documents_path }
       format.json { head :no_content }
     end
   end
 
   # GET /documents/tags.json
   def tags
-    tag_list = Document.all.flat_map { |d| d.tags.to_a }.uniq
+    tag_list = Document.all.map { |d| d.tags.to_a }.flatten.uniq
     render json: tag_list
   end
 
   private
 
   def apply_tag
-    @documents.where(:tags => params[:tag])
+    @documents.where(tags: params[:tag])
   end
 
   def apply_search
@@ -113,11 +114,11 @@ class DocumentsController < ApplicationController
 
   def sort_column
     case params[:sort]
-    when "author"
+    when 'author'
       :author
-    when "filename"
+    when 'filename'
       :filename
-    when "created_at"
+    when 'created_at'
       :created_at
     else
       :title
@@ -125,6 +126,6 @@ class DocumentsController < ApplicationController
   end
 
   def sort_direction
-    params[:direction] == :desc ? :desc : :asc
+    params[:direction] == 'desc' ? :desc : :asc
   end
 end
