@@ -32,7 +32,7 @@ describe DocumentsController do
     it 'populates documents matching a tag' do
       get :index, tag: 'fishing'
       options = assigns(:documents).instance_variable_get(:@options)
-      options[:where].should == [[{:tags => 'fishing'}]]
+      options[:where].should == [[{tags: 'fishing'}]]
       options[:order].should == [:title, :asc]
     end
 

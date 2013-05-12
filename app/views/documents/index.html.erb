@@ -1,5 +1,5 @@
 <% if params[:tag] %>
-  Filtered to documents tagged
+  Filtered to documents tagged &nbsp;
   <%= link_to params[:tag], params.except(:offset).merge(:tag => params[:tag]), :class => 'tag' %>
   <%= link_to params.except(:tag, :offset), :class => 'action-btn' do %>
     <i class="icon-remove-sign"></i>
@@ -8,7 +8,7 @@
 <% end %>
 
 <% if params[:search] %>
-  Filtered to documents matching
+  Filtered to documents matching search term &nbsp;
   <%= link_to params[:search], params.except(:offset).merge(:search => params[:search]), :class => 'tag' %>
   <%= link_to params.except(:search, :offset), :class => 'action-btn' do %>
     <i class="icon-remove-sign"></i>

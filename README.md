@@ -1,8 +1,11 @@
 docstore
 ========
 
-docstore is a simple Rails application to manage documents stored in Amazon S3
-and SimpleDB.
+docstore lets you store and manage your documents in the cloud with Amazon S3 &
+SimpleDB. 
+
+docstore comes as a Rails 3 web application. Run it locally, or deploy it (runs
+fine on the Heroku free plan, see the guide below).
 
 
 Installation
@@ -21,8 +24,8 @@ for the app:
 - `AWS_SECRET_ACCESS_KEY`: your AWS secret access key
 - `DOCSTORE_S3_BUCKET_ID`: AWS S3 bucket to hold your documents
 - `DOCSTORE_SDB_DOMAIN`: AWS SimpleDB domain to hold document metadata
-- `DOCSTORE_USER`: basic auth username you'll use to log in
-- `DOCSTORE_PASS`: basic auth password you'll use to log in
+- `DOCSTORE_USER`: log in with this username over basic auth
+- `DOCSTORE_PASS`: log in with this password over basic auth
 
 After exporting the environment variables, you can use `rake simpledb:setup`
 and `rake s3:setup` to create the domain and bucket if they do not already

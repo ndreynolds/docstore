@@ -4,8 +4,8 @@
       <th><%= sortable "title" %></th>
       <th><%= sortable "author" %></th>
       <th>Tags</th>
-      <th class="medium-hidden"><%= sortable "filename" %></th>
-      <th class="medium-hidden"><%= sortable "created_at", "Added" %></th>
+      <th class="mobile-hidden"><%= sortable "filename" %></th>
+      <th class="mobile-hidden"><%= sortable "created_at", "Added" %></th>
       <th></th>
     </tr>
   </thead>
@@ -14,7 +14,6 @@
   <% next_offset = @documents.each do |document| %>
     <tr>
       <td>
-        <i class="icon-file"></i>
         <%= link_to truncate(document.title, :length => 50), document, :title => document.title  %>
       </td>
       <td><%= document.author %></td>
@@ -23,8 +22,8 @@
           <%= link_to tag, params.merge(:tag => tag), :class => 'tag' %>
         <% end %>
       </td>
-      <td class="medium-hidden"><a href="<%= document.file_url %>"><%= document.filename %></a></td>
-      <td class="medium-hidden"><%= time_ago_in_words(document.created_at) %> ago</td>
+      <td class="mobile-hidden"><a href="<%= document.file_url %>"><%= document.filename %></a></td>
+      <td class="mobile-hidden"><%= time_ago_in_words(document.created_at) %> ago</td>
       <td>
         <%= link_to document.file_url.to_s, :class => 'action-btn', :download => document.filename do %>
           <i class="icon-cloud-download"></i>

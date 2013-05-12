@@ -1,0 +1,21 @@
+/*
+ *= require 'font-awesome.min'
+ *= require 'jquery-ui'
+ *= require 'jquery.tagit'
+ *= require 'tagit.ui-zendesk'
+ *= require_self
+ */
+
+$river:    #3498DB;
+$belize:   #2980B9;
+$asphalt:  #34495E;
+$midnight: #2C3E50;
+$clouds:   #ECF0F1;
+$silver:   #BDC3C7;
+$concrete: #95A5A6;
+$abestos:  #7F8C8D;
+$error:    #E74C3C;
+$notice:   #27AE60;
+
+@import "layout.css.scss";
+@import "documents.css.scss";

@@ -9,6 +9,23 @@
       .image-wrapper {
         position: relative;
         height: 135px;
+        .document-toolbar {
+          display: none;
+          position: absolute;
+          width: 155px;
+          opacity: 0.9;
+          text-align: right;
+          background: $clouds;
+          padding: 5px;
+          z-index: 1;
+          a {
+            display: inline;
+            font-size: 15px;
+          }
+          a.open-link {
+            float: left;
+          }
+        }
         img {
           position: absolute;
           top: 0;
@@ -16,7 +33,7 @@
           margin: auto;
           left: 0;
           right: 0;
-          border: 1px solid #333;
+          border: 2px solid $silver;
           min-height: 50px;
           opacity: 0;
           transition: opacity 1s;
@@ -34,19 +51,36 @@
 
   table {
     font-size: 16px;
+
     width: 100%;
     border-collapse: collapse;
 
+    &,
+    a {
+      color: #666;
+    }
+
+    a.tag,
+    a.action-btn {
+      color: $abestos;
+      &:hover {
+        color: $belize;
+      }
+    }
+
     tr:nth-child(even) {
-      background: #f3f3f3;
+      background: $clouds;
     }
 
     td {
       padding: 3px;
       max-height: 30px;
+      word-wrap: nowrap;
     }
 
-    th {
+    th,
+    th a {
+      color: $abestos;
       text-align: left;
     }
 
@@ -59,11 +93,15 @@
       }
     }
   }
+
+  .clearfix {
+    clear: both;
+  }
 }
 
 @media (max-width: 1200px) {
-  th.medium-hidden,
-  td.medium-hidden {
+  th.mobile-hidden,
+  td.mobile-hidden {
     display: none;
   }
 }
@@ -71,7 +109,7 @@
 .document-form-wrapper {
   width: 320px;
   margin: 50px auto;
-  border: 2px solid black;
+  border: 2px solid $silver;
   padding: 20px;
 }
 

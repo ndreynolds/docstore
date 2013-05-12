@@ -1,0 +1,37 @@
+<div class="header">
+  <%= link_to documents_path, :class => 'logo' do %>
+    <i class="icon-file-alt icon-large"></i> DOCSTORE
+  <% end %>
+
+  <% if flash[:notice] || flash[:error] %>
+    <div class="notice <%= flash[:error] ? 'error' : '' %>">
+      <%= flash[:notice] || flash[:error] %>
+      <a class="close"><i class="icon-remove-circle"></i></a>
+    </div>
+  <% end %>
+
+  <% if params[:controller] == 'documents' && params[:action] == 'index' %>
+
+    <button data-dialog="upload-dialog" id="form-open-btn" class="btn btn-dark"> 
+      <i class="icon-cloud-upload"></i> Upload
+    </button>
+
+    <div class="view-options">
+      <%= link_to params.merge(:view => 'grid'), :class => params[:view] == 'list' ? '' : 'active' do %>
+        <i class="icon-large icon-th"></i>
+      <% end %>
+      <%= link_to params.merge(:view => 'list'), :class => params[:view] == 'list' ? 'active' : '' do %>
+        <i class="icon-large icon-list"></i>
+      <% end %>
+    </div>
+
+  <% else %>
+
+    <%= link_to new_document_path, :id => 'form-open-btn', :class => 'btn btn-dark' do %>
+      <i class="icon-cloud-upload"></i> Upload
+    <% end %>
+
+  <% end %>
+
+  <input type="text" class="search" placeholder="Search documents..." value="<%= params[:search] %>">
+</div>

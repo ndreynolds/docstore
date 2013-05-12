@@ -10,7 +10,7 @@ class Document < AWS::Record::Base
 
   # Set the SimpleDB domain name from the configuration.
   def initialize(*args)
-    raise 'DOCSTORE_SDB_DOMAIN not set' if Rails.configuration.sdb_domain.blank?
+    raise '$DOCSTORE_SDB_DOMAIN not set' if Rails.configuration.sdb_domain.blank?
     self.class.set_domain_name Rails.configuration.sdb_domain
 
     raise '$DOCSTORE_S3_BUCKET_ID not set' if Rails.configuration.s3_bucket_id.blank?

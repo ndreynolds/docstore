@@ -1,22 +1,35 @@
-<div class="grid">
-<% next_offset = @documents.each do |document| %>
-  <div class="document document-grid">
-    <div class="image-wrapper">
-      <%= link_to image_tag(document.thumb_url, 
-            :onLoad => "this.style.opacity='1'",
-            :onError => "this.src = '#{image_path('document.png')}'"), document %>
+<div class="documents-grid">
+  <% next_offset = @documents.each do |document| %>
+    <div class="document document-grid">
+      <div class="image-wrapper">
+        <div class="document-toolbar">
+          <%= link_to 'Open', document, :class => 'open-link' %>
+          <%= link_to document.file_url.to_s, class: 'action-btn', 
+                title: 'Download document', download: document.filename do %>
+            <i class="icon-cloud-download icon-large"></i>
+          <% end %>
+          <%= link_to edit_document_path(document), class: 'action-btn', 
+                :title => 'Edit document' do %>
+            <i class="icon-pencil icon-large"></i>
+          <% end %>
+          <%= link_to document, class: 'action-btn', method: :delete, 
+                title: 'Delete document', data: { confirm: 'Are you sure?' } do %>
+            <i class="icon-trash icon-large"></i>
+          <% end %>
+        </div>
+        <%= link_to image_tag(document.thumb_url, 
+              onLoad: "this.style.opacity='1'",
+              onError: "this.src = '#{image_path('document.png')}'"), document %>
+      </div>
+      <%= link_to truncate(document.title, :length => 25), document, :title => document.title  %>
     </div>
-    <%= link_to truncate(document.title, :length => 25), document, :title => document.title  %>
-  </div>
-<% end %>
+  <% end %>
 
-<% if @documents.count == 0 %>
-  <div class="empty">
-    <h1>Welcome to your <strong>docstore</strong></h1>
-    You don't have any documents yet.
-    <br>
-    Try <strong><%= link_to 'uploading', new_document_path %></strong> a new one.
+  <% if @documents.count == 0 and params.has_key? :search %>
+    <i class="icon-exclamation-sign"></i> No results
+  <% elsif @documents.count == 0 %>
+    <%= render :partial => 'documents/first_run' %>
+  <% end %>
 
-  </div>
-<% end %>
+  <div class="clearfix"></div>
 </div>

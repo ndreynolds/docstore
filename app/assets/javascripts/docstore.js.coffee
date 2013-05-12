@@ -57,3 +57,8 @@ $ ->
     return unless e.which == 13
     location.href = updateQueryParam location.href, 'search', $(@).val()
     false
+
+  $('.document-grid').hover(
+    -> $(@).find('.document-toolbar').show(),
+    -> $(@).find('.document-toolbar').hide()
+  )

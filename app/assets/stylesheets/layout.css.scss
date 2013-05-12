@@ -1,15 +1,50 @@
+body {
+  font-family: Lato, sans-serif;
+  color: $abestos;
+}
+
+h2 {
+  margin: 0 20px 0 0;
+  display: inline;
+  color: $abestos;
+}
+
+h3 {
+  font-weight: 300;
+  margin: 5px 0;
+  color: $abestos;
+}
+
+hr {
+  border: 1px solid $silver;
+  margin: 15px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.dimmed {
+  opacity: 0.5;
+}
+
 .header {
   font-size: 20px;
   padding-top: 10px;
   padding-bottom: 17px;
   margin-bottom: 15px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid $silver;
 
   a.logo {
-    background: url('logo.png') no-repeat;
-    padding-left: 35px;
-    padding-bottom: 10px;
-    padding-top: 5px;
+    color: $concrete;
+    i {
+      position: relative;
+      bottom: 2px;
+    }
+    &:hover {
+      color: $belize;
+      transition: color 200ms linear;
+    }
   }
 
   a:hover {
@@ -18,7 +53,8 @@
 
   #form-open-btn {
     float: right;
-    margin-top: -8px;
+    padding: 6px;
+    margin-top: -5px;
   }
 
   .view-options {
@@ -28,14 +64,15 @@
     position: relative;
     bottom: 5px;
     a {
-      color: gray;
+      color: $silver;
       &:first-child {
         margin-right: 7px;
-        border-right: 3px solid black;
+        padding-right: 2px;
+        border-right: 3px solid $silver;
       }
       &:hover,
       &.active {
-        color: black;
+        color: $belize;
       }
     }
   }
@@ -49,17 +86,52 @@
   }
 }
 
+.footer {
+  border-top: 2px solid $silver;
+  margin-top: 20px;
+  padding: 10px 0;
+  
+  a,
+  a:visited,
+  a:active,
+  a:hover {
+    text-decoration: underline;
+    color: $belize;
+  }
+
+  i {
+    margin: 0 5px;
+  }
+
+  .settings {
+    float: right;
+    code {
+      border: 2px solid $silver;
+      padding: 2px;
+      margin-right: 10px;
+      margin-left: 5px;
+    }
+  }
+}
+
 .notice {
-  border: 2px solid green;
-  color: green;
+  border: 2px solid $notice;
+  color: $notice;
   padding: 10px;
   margin: 15px 20px 0 20px;
   font-size: 15px;
   display: inline;
 
+  &.error {
+    border-color: $error;
+    a.close {
+      color: $error;
+    }
+  }
+
   a.close {
     margin-left: 10px;
-    color: green;
+    color: $notice;
     &:hover {
       text-decoration: none;
       cursor: pointer;
@@ -68,18 +140,18 @@
 }
 
 .dialog {
-  position: absolute;
+  position: fixed;
   width: 320px;
   top: 50%;
   left: 50%;
   margin-left: -160px;
   margin-top: -130px;
   background: white;
-  border: 2px solid black;
+  border: 2px solid $silver;
   padding: 20px;
-  -moz-box-shadow: 0 7px 7px rgba(0,0,0,0.7);
-  -webkit-box-shadow: 0 7px 7px rgba(0,0,0,0.7);
-  box-shadow: 0 7px 7px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0 7px 7px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 7px 7px rgba(0,0,0,0.2);
+  box-shadow: 0 7px 7px rgba(0,0,0,0.2);
 }
 
 .empty {
@@ -88,24 +160,27 @@
 }
 
 input[type=text] {
-  border: 2px solid black;
+  border: 2px solid $silver;
   padding: 7px;
   outline: none;
   font-size: 13px;
-  color: black;
+  color: $abestos;
   width: 300px;
 
   &:focus {
-    border-color: #08c;
+    border-color: $belize;
   }
 }
 
 .field_with_errors input[type=text] {
-  border-color: #bc3522;
+  border-color: $error;
 }
 
 .btn {
-  border: 2px solid black;
+  border: 2px solid $belize;
+  border-radius: 3px;
+  color: $belize;
+  margin: 0;
   font-size: 17px;
   padding: 8px;
   cursor: pointer;
@@ -114,10 +189,14 @@ input[type=text] {
   &:hover {
     text-decoration: none
   }
+  &:visited,
+  &:active {
+    color: $belize;
+  }
 }
 
 .btn-dark {
-  background: black;
+  background: $belize;
   &, 
   &:visited,
   &:active,
@@ -128,37 +207,37 @@ input[type=text] {
 
 a {
   text-decoration: none;
-  color: black;
+  color: $abestos;
   &:visited,
   &:active {
-    color: black;
+    color: $abestos;
   }
   &:hover {
     text-decoration: underline;
   }
 
   &.action-btn {
-    color: gray;
+    color: $concrete;
   }
   &.action-btn:hover {
     text-decoration: none;
-    color: black;
+    color: $belize;
   }
   &.tag {
     font-size: 12px;
     padding: 2px;
-    border: 2px solid gray;
+    border: 2px solid $concrete;
     text-decoration: none;
     
     &,
     &:active,
     &:visited {
-      color: gray;
+      color: $concrete;
     }
 
     &:hover {
-      color: black;
-      border-color: black;
+      color: $belize;
+      border-color: $belize;
       text-decoration: none;
     }
   }
@@ -168,11 +247,27 @@ a {
 
 ul.tagit {
   width: 300px;
-  padding: 7px;
   margin: 12px 0;
+  border-radius: 0;
+  border-color: $silver;
 
   &.active {
-    border-color: #08c;
+    border-color: $belize;
+  }
+
+  li.tagit-choice {
+    background: $clouds;
+    border: 2px solid $silver;
+    color: $concrete;
+
+    &:hover {
+      border-color: $belize;
+    }
+
+    span.tagit-label,
+    a.tagit-close > span.text-icon {
+      color: $concrete;
+    }
   }
 }
 
