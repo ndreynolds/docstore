@@ -4,12 +4,12 @@ docstore
 docstore lets you store and manage your documents in the cloud with Amazon S3 &
 SimpleDB. 
 
-docstore comes as a Rails 3 web application. Run it locally, or deploy it (runs
-fine on the Heroku free plan, see the guide below).
+It comes as a Rails 3 web application. Run it locally, or deploy it (runs fine
+on the Heroku free plan, see the guide below).
 
-![](screenshots/index.png)
-![](screenshots/tags.png)
-![](screenshots/search.png)
+![Index](screenshots/index.png)
+![Tags](screenshots/tags.png)
+![Search](screenshots/search.png)
 
 
 Installation
