@@ -7,6 +7,10 @@ SimpleDB.
 docstore comes as a Rails 3 web application. Run it locally, or deploy it (runs
 fine on the Heroku free plan, see the guide below).
 
+![](screenshots/index.png)
+![](screenshots/tags.png)
+![](screenshots/search.png)
+
 
 Installation
 ------------
@@ -81,7 +85,7 @@ Deploying your own docstore to Heroku
 
 5. Push your docstore to Heroku
 
-        git push heroku
+        git push heroku master
 
 6. Run the rake tasks to create your S3 bucket and SimpleDB domain. If these
    already exist, you can skip this step.
