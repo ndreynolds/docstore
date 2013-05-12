@@ -8,7 +8,7 @@ It comes as a Rails 3 web application. Run it locally, or deploy it (runs fine
 on the Heroku free plan, see the guide below).
 
 ![Index](screenshots/index.png)
-![Tags](screenshots/tags.png)
+![Filtering](screenshots/filtering.png)
 ![Search](screenshots/search.png)
 
 
