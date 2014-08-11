@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DocumentsController do
+describe DocumentsController, type: :controller do
   before :each do
     AWS.stub!
     controller.stub authenticate: true

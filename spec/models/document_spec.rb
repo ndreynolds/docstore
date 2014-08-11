@@ -11,11 +11,13 @@ describe Document do
     Document.send(:attr_writer, :id)
 
     @doc = Document.new
-    @doc.sobjects = mock AWS::S3::ObjectCollection
+    @doc.sobjects = double AWS::S3::ObjectCollection
     @doc.id = 'abc42'
     @doc.filename = 'foo.pdf'
 
-    opts = { type: '', head: '', tempfile: stub(open: true) }
+    tempfile = double 'tempfile'
+    allow(tempfile).to receive(:open).and_return(true)
+    opts = { type: '', head: '', tempfile: tempfile }
     @uploaded_file = ActionDispatch::Http::UploadedFile.new opts
   end
 
@@ -60,7 +62,9 @@ describe Document do
   end
 
   it 'should set the filename when file is set' do
-    @doc.file = stub original_filename: 'file.pdf'
+    file_double = double 'file'
+    expect(file_double).to receive(:original_filename).and_return('file.pdf')
+    @doc.file = file_double
     @doc.filename.should == 'file.pdf'
   end
 
@@ -74,13 +78,15 @@ describe Document do
   end
 
   it 'provides the file url when a filename is set' do
-    s3_obj = stub url_for: 'http://foo.com'
+    s3_obj = double 's3_obj'
+    expect(s3_obj).to receive(:url_for).and_return('http://foo.com')
     @doc.should_receive(:file_s3_obj).and_return(s3_obj)
     @doc.file_url.should == 'http://foo.com'
   end
 
   it 'provides the file thumbnail url when a filename is set' do
-    s3_obj = stub url_for: 'http://bar.com'
+    s3_obj = double 's3_obj'
+    expect(s3_obj).to receive(:url_for).and_return('http://bar.com')
     @doc.should_receive(:file_s3_obj_thumb).and_return(s3_obj)
     @doc.thumb_url.should == 'http://bar.com'
   end
@@ -113,7 +119,9 @@ describe Document do
 
   it 'tries to upload the file to S3 when present' do
     @doc.should_receive(:upload_file).once.and_return(true)
-    @doc.file = stub original_filename: 'file.pdf'
+    file_double = double 'file'
+    expect(file_double).to receive(:original_filename).and_return('file.pdf')
+    @doc.file = file_double
     @doc.save
   end
 
